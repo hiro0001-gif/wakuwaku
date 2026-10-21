@@ -35,29 +35,9 @@
 					<div class="mini-info"><b>営業日・営業時間</b>
 						<p>水・金・土<br>9:00〜18:00</p><small>年末年始等の休日は事前にお知らせします。</small></div>
 				</aside>
-				<form class="main-form" data-reservation-form>
-					<div class="field-grid"><label>会員ID <em>必須</em><input name="memberId" required
-					                                                          autocomplete="off"
-					                                                          placeholder="例：BS0001"></label><label>お名前
-						<em>必須</em><input name="name" autocomplete="name" required placeholder="例：青森 花子"></label><label
-							class="wide">登録番号（電話番号） <em>必須</em><input name="tel" type="tel" autocomplete="tel"
-					                                                            required placeholder="例：090-1234-5678"></label><label>希望日
-						<em>必須</em><input name="date" type="date" required></label><label>開始時間
-						<em>必須</em><select name="time" required disabled>
-							<option value="">先に希望日を選択してください</option>
-						</select></label><label class="wide">利用時間 <em>必須</em><select name="duration" required
-					                                                                       disabled>
-						<option value="">開始時間を選択してください</option>
-					</select></label><label class="wide">人数 <em>必須</em><select name="people" required disabled>
-						<option value="">利用時間を選択してください</option>
-					</select><span class="remaining" data-remaining
-					               aria-live="polite">各1時間枠につき8人まで予約できます。</span></label></div>
-					<p class="privacy-note">
-						入力いただいた情報は、予約確認のためにのみ使用します。健康診断結果などの健康情報は入力しないでください。</p>
-					<p class="system-note">
-						通信状況などにより、まれに予約手続きが正常に完了しない場合があります。完了画面が表示されない場合は、お手数ですが時間をおいて再度お試しいただくか、お電話でお問い合わせください。</p>
-					<button class="button form-button" type="submit">この内容で予約する</button>
-					<p class="form-status" role="status" aria-live="polite"></p></form>
+				<div class="main-form">
+					<iframe title="健康麻雀 会員予約フォーム" width="300" height="420" src="https://select-type.com/rsv/?id=MhqCu1SGBBY&amp;w_flg=1" frameborder="0" style="display:block;width:100%;height:850px;border:0;" loading="lazy"></iframe>
+				</div>
 			</section>
 		</main>
 		<footer id="siteFooter"></footer>
