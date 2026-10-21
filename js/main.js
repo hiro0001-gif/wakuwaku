@@ -4,16 +4,29 @@ const header=document.querySelector('#siteHeader');
 header.className='site-header';
 header.innerHTML=`<div class="header-inner"><a class="logo" href="index.html" aria-label="わくわくB&S トップ"><span class="logo-mark" aria-hidden="true"><img src="images/logo.png" alt=""></span><span class="logo-type"><strong>わくわく <em>B&S</em></strong><small>みんなの健康コミュニティ</small></span></a><nav class="global-nav" id="globalNav" aria-label="メインメニュー">${pages.map(([id,label,url])=>`<a href="${url}" ${id===current?'aria-current="page"':''} class="${id==='reservation'?'header-reserve':''}">${label}</a>`).join('')}</nav></div>`;
 const footer=document.querySelector('#siteFooter');footer.className='site-footer';footer.innerHTML=`<div class="wrap"><div class="footer-grid"><div><a class="footer-logo" href="index.html"><span class="footer-logo-mark"><img src="images/logo.png" alt=""></span> わくわくB&S</a><p>遊ぶ・話す・動く・健康を知る。<br>古民家で楽しむ、地域のコミュニティ。</p></div><div><h3>施設情報</h3><p>営業：木・金・土</p><p>年末年始等、休日がある場合は事前にお知らせします。</p><p>時間：9:00〜18:00</p><p>〒030-0854<br>青森県青森市千富町（仮住所）</p><p><a href="tel:0000000000">電話：000-0000-0000</a></p></div><div><h3>メニュー</h3><nav class="footer-links">${pages.map(([,label,url])=>`<a href="${url}">${label}</a>`).join('')}</nav></div></div><p class="copyright">© 2026 WAKUWAKU B&S</p></div>`;
-const slides=[...document.querySelectorAll('[data-slide]')];if(slides.length){const dots=document.querySelector('.hero-dots');let index=0;let timer;slides.forEach((_,i)=>{const b=document.createElement('button');b.type='button';b.setAttribute('role','tab');b.setAttribute('aria-label',`${i+1}枚目を表示`);b.addEventListener('click',()=>show(i,true));dots.appendChild(b)});const buttons=[...dots.children];function show(next,manual=false){slides[index].classList.remove('is-active');buttons[index].setAttribute('aria-selected','false');index=(next+slides.length)%slides.length;slides[index].classList.add('is-active');buttons[index].setAttribute('aria-selected','true');if(manual)restart()}function restart(){clearInterval(timer);timer=setInterval(()=>show(index+1),6000)}document.querySelector('.hero-arrow.prev').addEventListener('click',()=>show(index-1,true));document.querySelector('.hero-arrow.next').addEventListener('click',()=>show(index+1,true));buttons[0].setAttribute('aria-selected','true');restart()}
+const slides=[...document.querySelectorAll('[data-slide]')];
+if(slides.length>1&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+ let index=0;
+ setInterval(()=>{
+  slides[index].classList.remove('is-active');
+  index=(index+1)%slides.length;
+  slides[index].classList.add('is-active');
+ },6000);
+}
 document.querySelectorAll('[data-demo-form]').forEach(form=>form.addEventListener('submit',e=>{e.preventDefault();form.querySelector('.form-status').textContent='入力内容を確認しました。送信機能は運用開始時に接続します。'}));
 
 document.querySelectorAll('.news-item').forEach(item=>{
-  const setOpen=open=>item.classList.toggle('is-open',open);
-  item.addEventListener('mouseenter',()=>setOpen(true));
-  item.addEventListener('mouseleave',()=>{if(!item.matches(':focus-within')&&item.dataset.manual!=='true')setOpen(false)});
-  item.addEventListener('focusin',()=>setOpen(true));
-  item.addEventListener('focusout',()=>setTimeout(()=>{if(!item.matches(':focus-within')&&item.dataset.manual!=='true')setOpen(false)},0));
-  item.addEventListener('click',()=>{item.dataset.manual=item.dataset.manual==='true'?'false':'true';setOpen(item.dataset.manual==='true')});
+ const button=item.querySelector('.news-summary');
+ const detail=item.querySelector('.news-detail');
+ const icon=button.querySelector('.news-toggle');
+ const title=button.querySelector('strong').textContent;
+ button.addEventListener('click',()=>{
+  const open=button.getAttribute('aria-expanded')!=='true';
+  button.setAttribute('aria-expanded',String(open));
+  button.setAttribute('aria-label',`${title}の詳細を${open?'閉じる':'開く'}`);
+  detail.hidden=!open;
+  icon.textContent=open?'×':'＋';
+ });
 });
 
 const reservationForm=document.querySelector('[data-reservation-form]');
