@@ -3,7 +3,7 @@ const current=document.body.dataset.page;
 const header=document.querySelector('#siteHeader');
 header.className='site-header';
 header.innerHTML=`<div class="header-inner"><a class="logo" href="index.html" aria-label="わくわくB&S トップ"><span class="logo-mark" aria-hidden="true"><img src="images/logo.png" alt=""></span><span class="logo-type"><strong>わくわく <em>B&S</em></strong><small>みんなの健康コミュニティ</small></span></a><nav class="global-nav" id="globalNav" aria-label="メインメニュー">${pages.map(([id,label,url])=>`<a href="${url}" ${id===current?'aria-current="page"':''} class="${id==='reservation'?'header-reserve':''}">${label}</a>`).join('')}</nav></div>`;
-const footer=document.querySelector('#siteFooter');footer.className='site-footer';footer.innerHTML=`<div class="wrap"><div class="footer-grid"><div><a class="footer-logo" href="index.html"><span class="footer-logo-mark"><img src="images/logo.png" alt=""></span> わくわくB&S</a><p>遊ぶ・話す・動く・健康を知る。<br>古民家で楽しむ、地域のコミュニティ。</p></div><div><h3>施設情報</h3><p>営業：木・金・土</p><p>年末年始等、休日がある場合は事前にお知らせします。</p><p>時間：9:00〜18:00</p><p>〒030-0854<br>青森県青森市千富町1丁目3-42</p><p><a href="tel:0000000000">電話：000-0000-0000</a></p></div><div><h3>メニュー</h3><nav class="footer-links">${pages.map(([,label,url])=>`<a href="${url}">${label}</a>`).join('')}</nav></div></div><p class="copyright">© 2026 WAKUWAKU B&S</p></div>`;
+const footer=document.querySelector('#siteFooter');footer.className='site-footer';footer.innerHTML=`<div class="wrap"><div class="footer-grid"><div><a class="footer-logo" href="index.html"><span class="footer-logo-mark"><img src="images/logo.png" alt=""></span> わくわくB&S</a><p>遊ぶ・話す・動く・健康を知る。<br>古民家で楽しむ、地域のコミュニティ。</p></div><div><h3>施設情報</h3><p>営業：水・金・土</p><p>年末年始等、休日がある場合は事前にお知らせします。</p><p>時間：9:00〜18:00</p><p>〒030-0854<br>青森県青森市千富町1丁目3-42</p><p><a href="tel:0000000000">電話：000-0000-0000</a></p></div><div><h3>メニュー</h3><nav class="footer-links">${pages.map(([,label,url])=>`<a href="${url}">${label}</a>`).join('')}</nav></div></div><p class="copyright">© 2026 WAKUWAKU B&S</p></div>`;
 // Fixed page-top control shared by every page.
 const pageTop=document.createElement('button');
 pageTop.type='button';
@@ -63,7 +63,7 @@ if(reservationForm){
   dateInput.min=localToday;
   const readBookings=()=>{try{return JSON.parse(localStorage.getItem(storageKey)||'{}')}catch{return {}}};
   const slotKey=(date,hour)=>`${date}|${hour}:00`;
-  const isOpenDay=date=>{const day=new Date(`${date}T12:00:00`).getDay();return day>=4&&day<=6};
+  const isOpenDay=date=>{const day=new Date(`${date}T12:00:00`).getDay();return day===3||day===5||day===6};
   const occupiedHours=(start,duration)=>{
     const hours=duration==='day'?18-start:Number(duration);
     return Array.from({length:hours},(_,i)=>start+i);
@@ -94,7 +94,7 @@ if(reservationForm){
   const updateTimes=()=>{
     timeSelect.innerHTML='<option value="">開始時間を選択してください</option>';durationSelect.innerHTML='<option value="">開始時間を選択してください</option>';peopleSelect.innerHTML='<option value="">利用時間を選択してください</option>';durationSelect.disabled=true;peopleSelect.disabled=true;status.textContent='';
     if(!dateInput.value){timeSelect.disabled=true;remainingText.textContent='各1時間枠につき8人まで予約できます。';return}
-    if(!isOpenDay(dateInput.value)){timeSelect.disabled=true;remainingText.textContent='営業日は木・金・土曜日です。別の日を選択してください。';return}
+    if(!isOpenDay(dateInput.value)){timeSelect.disabled=true;remainingText.textContent='営業日は水・金・土曜日です。別の日を選択してください。';return}
     timeSelect.disabled=false;const bookings=readBookings();
     startHours.forEach(hour=>{const remaining=Math.max(0,capacity-(bookings[slotKey(dateInput.value,hour)]||0));const option=document.createElement('option');option.value=String(hour);option.textContent=remaining===0?`${hour}:00（満席）`:`${hour}:00（残り${remaining}人）`;option.disabled=remaining===0;timeSelect.appendChild(option)});
     remainingText.textContent='開始時間を選択してください。';
@@ -103,7 +103,7 @@ if(reservationForm){
   reservationForm.addEventListener('submit',e=>{
     e.preventDefault();status.textContent='';
     if(!reservationForm.reportValidity())return;
-    if(!isOpenDay(dateInput.value)){status.textContent='営業日は木・金・土曜日です。';return}
+    if(!isOpenDay(dateInput.value)){status.textContent='営業日は水・金・土曜日です。';return}
     const start=Number(timeSelect.value);const duration=durationSelect.value;const requested=Number(peopleSelect.value);
     if(availableFor(dateInput.value,start,duration)<requested){status.textContent='残席数が変わりました。日時・利用時間・人数をもう一度選択してください。';updateTimes();return}
     const bookings=readBookings();occupiedHours(start,duration).forEach(hour=>{const key=slotKey(dateInput.value,hour);bookings[key]=(bookings[key]||0)+requested});

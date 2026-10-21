@@ -671,10 +671,21 @@ button, input, select, textarea {
 
 .price-grid {
     display: grid;
-    grid-template-columns:repeat(3, 1fr);
+    grid-template-columns:repeat(4, minmax(0, 1fr));
     gap: 20px;
     align-items: stretch;
     margin-bottom: 28px
+}
+
+.monthly-pass {
+    border-color: var(--blue) !important;
+    background: var(--blue-pale) !important
+}
+
+.monthly-price {
+    margin: 22px 0 0;
+    padding-top: 18px;
+    border-top: 1px solid var(--line)
 }
 
 .price-grid article {
@@ -1072,8 +1083,12 @@ button, input, select, textarea {
         gap: 40px
     }
 
-    .activity-cards, .price-grid {
+    .activity-cards {
         grid-template-columns:1fr
+    }
+
+    .price-grid {
+        grid-template-columns:repeat(2, minmax(0, 1fr))
     }
 
     .price-grid article.recommended {
@@ -2129,6 +2144,15 @@ p, dd, li {
     font-size: 15px
 }
 
+.price-guide .registration-fee {
+    padding: 12px 16px;
+    border-left: 5px solid var(--blue-dark);
+    border-radius: 6px;
+    background: var(--blue-pale);
+    color: var(--blue-deep);
+    font-size: 20px
+}
+
 .footer-tax {
     text-align: center;
     margin: 38px 0 0 !important;
@@ -2189,6 +2213,10 @@ p, dd, li {
 }
 
 @media (max-width: 640px) {
+    .price-grid {
+        grid-template-columns:1fr
+    }
+
     .header-inner {
         padding-bottom: 10px
     }
@@ -2352,9 +2380,9 @@ p, dd, li {
 
 .price-tax {
     text-align: right;
-    font-size: 14px;
-    margin: 12px 0 0;
-    color: var(--muted)
+    font-size: 16px;
+    margin: -12px 0 0;
+    color: var(--ink)
 }
 
 @media (max-width: 960px) {
