@@ -3,7 +3,25 @@ const current=document.body.dataset.page;
 const header=document.querySelector('#siteHeader');
 header.className='site-header';
 header.innerHTML=`<div class="header-inner"><a class="logo" href="index.html" aria-label="わくわくB&S トップ"><span class="logo-mark" aria-hidden="true"><img src="images/logo.png" alt=""></span><span class="logo-type"><strong>わくわく <em>B&S</em></strong><small>みんなの健康コミュニティ</small></span></a><nav class="global-nav" id="globalNav" aria-label="メインメニュー">${pages.map(([id,label,url])=>`<a href="${url}" ${id===current?'aria-current="page"':''} class="${id==='reservation'?'header-reserve':''}">${label}</a>`).join('')}</nav></div>`;
-const footer=document.querySelector('#siteFooter');footer.className='site-footer';footer.innerHTML=`<div class="wrap"><div class="footer-grid"><div><a class="footer-logo" href="index.html"><span class="footer-logo-mark"><img src="images/logo.png" alt=""></span> わくわくB&S</a><p>遊ぶ・話す・動く・健康を知る。<br>古民家で楽しむ、地域のコミュニティ。</p></div><div><h3>施設情報</h3><p>営業：木・金・土</p><p>年末年始等、休日がある場合は事前にお知らせします。</p><p>時間：9:00〜18:00</p><p>〒030-0854<br>青森県青森市千富町（仮住所）</p><p><a href="tel:0000000000">電話：000-0000-0000</a></p></div><div><h3>メニュー</h3><nav class="footer-links">${pages.map(([,label,url])=>`<a href="${url}">${label}</a>`).join('')}</nav></div></div><p class="copyright">© 2026 WAKUWAKU B&S</p></div>`;
+const footer=document.querySelector('#siteFooter');footer.className='site-footer';footer.innerHTML=`<div class="wrap"><div class="footer-grid"><div><a class="footer-logo" href="index.html"><span class="footer-logo-mark"><img src="images/logo.png" alt=""></span> わくわくB&S</a><p>遊ぶ・話す・動く・健康を知る。<br>古民家で楽しむ、地域のコミュニティ。</p></div><div><h3>施設情報</h3><p>営業：木・金・土</p><p>年末年始等、休日がある場合は事前にお知らせします。</p><p>時間：9:00〜18:00</p><p>〒030-0854<br>青森県青森市千富町1丁目3-42</p><p><a href="tel:0000000000">電話：000-0000-0000</a></p></div><div><h3>メニュー</h3><nav class="footer-links">${pages.map(([,label,url])=>`<a href="${url}">${label}</a>`).join('')}</nav></div></div><p class="copyright">© 2026 WAKUWAKU B&S</p></div>`;
+// Fixed page-top control shared by every page.
+const pageTop=document.createElement('button');
+pageTop.type='button';
+pageTop.className='page-top';
+pageTop.setAttribute('aria-label','ページの先頭に戻る');
+pageTop.innerHTML='<span class="page-top-arrow" aria-hidden="true"></span><span class="page-top-label" aria-hidden="true">TOP</span>';
+document.body.appendChild(pageTop);
+const updatePageTop=()=>{
+ const visible=window.scrollY>320;
+ pageTop.classList.toggle('is-visible',visible);
+ pageTop.tabIndex=visible?0:-1;
+ const footerTop=footer.getBoundingClientRect().top;
+ pageTop.classList.toggle('over-footer',footerTop<window.innerHeight-30);
+};
+window.addEventListener('scroll',updatePageTop,{passive:true});
+window.addEventListener('resize',updatePageTop);
+pageTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+updatePageTop();
 const slides=[...document.querySelectorAll('[data-slide]')];
 if(slides.length>1){
  let index=0;
