@@ -1884,14 +1884,6 @@ p, li, dd, dt, small, span {
     height: auto
 }
 
-.access-map figcaption {
-    padding: 16px 20px;
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--ink);
-    background: #fff
-}
-
 @media (max-width: 960px) {
     .access-layout {
         grid-template-columns:1fr
@@ -2369,10 +2361,3 @@ p, dd, li {
 .global-nav .header-reserve[aria-current="page"]::after{display:block;left:14px;right:14px;bottom:6px;background:#fff}
 @media(max-width:960px){.global-nav .header-reserve[aria-current="page"]::after{bottom:4px}}
 @media(max-width:640px){.page-top{right:12px;bottom:16px;width:56px;height:56px}.page-top.over-footer{bottom:70px}.page-top-arrow{width:19px;height:19px;border-width:4px;transform:translateY(5px) rotate(45deg)}.page-top-label{font-size:14px}.site-footer .copyright{padding-right:62px}.global-nav .header-reserve[aria-current="page"]{outline:2px solid var(--blue-deep);outline-offset:-2px}}
-/* A searchable map preserves street geography and station context. */
-.access-map iframe{width:100%;height:430px;border:0;display:block;background:var(--blue-pale)}
-.building-reference{display:flex;align-items:center;gap:14px;padding:14px 18px;background:#fff;border-top:1px solid var(--line)}
-.building-reference img{width:68px;height:68px;object-fit:cover;border-radius:7px;flex:none}
-.building-reference span{font-size:14px;line-height:1.55}
-.access-map figcaption a{text-decoration:underline;text-underline-offset:3px;color:var(--blue-deep)}
-@media(max-width:640px){.access-map iframe{height:330px}.building-reference img{width:60px;height:60px}}

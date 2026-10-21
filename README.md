@@ -1,4 +1,4 @@
-# わくわくB&S Webサイト 修正版v4
+# わくわくB&S Webサイト 修正版v8
 
 ## 確認方法
 
@@ -10,10 +10,10 @@ ZIPを展開し、フォルダ内の `index.html` をダブルクリックする
 - `activity.html`：できること
 - `price.html`：料金・サービス
 - `reservation.html`：会員予約
-- `access.html`：アクセス・仮案内図
+- `access.html`：アクセス・イラスト地図
 - `css/style.css`：全ページ共通のデザイン
 - `js/main.js`：スライド、お知らせ詳細、予約枠の処理
-- `images/`：ロゴ・メイン画像・仮案内図
+- `images/`：ロゴ・メイン画像・アクセス用イラスト地図
 
 ## 営業案内
 
