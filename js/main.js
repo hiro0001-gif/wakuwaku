@@ -5,7 +5,7 @@ header.className='site-header';
 header.innerHTML=`<div class="header-inner"><a class="logo" href="index.html" aria-label="わくわくB&S トップ"><span class="logo-mark" aria-hidden="true"><img src="images/logo.png" alt=""></span><span class="logo-type"><strong>わくわく <em>B&S</em></strong><small>みんなの健康コミュニティ</small></span></a><nav class="global-nav" id="globalNav" aria-label="メインメニュー">${pages.map(([id,label,url])=>`<a href="${url}" ${id===current?'aria-current="page"':''} class="${id==='reservation'?'header-reserve':''}">${label}</a>`).join('')}</nav></div>`;
 const footer=document.querySelector('#siteFooter');footer.className='site-footer';footer.innerHTML=`<div class="wrap"><div class="footer-grid"><div><a class="footer-logo" href="index.html"><span class="footer-logo-mark"><img src="images/logo.png" alt=""></span> わくわくB&S</a><p>遊ぶ・話す・動く・健康を知る。<br>古民家で楽しむ、地域のコミュニティ。</p></div><div><h3>施設情報</h3><p>営業：木・金・土</p><p>年末年始等、休日がある場合は事前にお知らせします。</p><p>時間：9:00〜18:00</p><p>〒030-0854<br>青森県青森市千富町（仮住所）</p><p><a href="tel:0000000000">電話：000-0000-0000</a></p></div><div><h3>メニュー</h3><nav class="footer-links">${pages.map(([,label,url])=>`<a href="${url}">${label}</a>`).join('')}</nav></div></div><p class="copyright">© 2026 WAKUWAKU B&S</p></div>`;
 const slides=[...document.querySelectorAll('[data-slide]')];
-if(slides.length>1&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+if(slides.length>1){
  let index=0;
  setInterval(()=>{
   slides[index].classList.remove('is-active');
